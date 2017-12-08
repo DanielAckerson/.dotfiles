@@ -6,6 +6,9 @@ filetype off                  " required
 
 if has('nvim')
     call plug#begin('~/.config/nvim/plugged')
+    
+    Plug 'Shougo/denite.nvim'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
     call plug#begin('~/.vim/plugged')
 endif
@@ -334,6 +337,8 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
 
 let g:syntastic_asm_compiler = 'nasm'
 let g:syntastic_asm_compiler_options = '-f elf'
+
+let g:deoplete#enable_at_startup = 1
 
 
 " File Browsing
