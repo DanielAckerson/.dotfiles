@@ -9,3 +9,7 @@
 alias   l.='ls -d .*'
 #get public IP using dig from dnsutils package; gets IP from DNS server because fast
 alias   wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+if [ -x "$(command -v nvim)" ]; then
+    alias   vim='nvim'
+fi

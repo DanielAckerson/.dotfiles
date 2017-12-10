@@ -48,7 +48,12 @@ export TERM=xterm-256color
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-export EDITOR='vim'
+if [ -x "$(command -v nvim)" ]; then
+    export MANPAGER="nvim -c 'set ft=man' -"
+    export EDITOR='nvim'
+else
+    export EDITOR='vim'
+fi
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
