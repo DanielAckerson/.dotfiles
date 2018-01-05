@@ -2,14 +2,16 @@
 
 
 """"""""""""""""""
-" => SETTINGS <= "
+" => Settings <= "
 """"""""""""""""""
 
 set number
 set relativenumber
 
-" Allows cursor to move past the last character in a line
+" makes cursor work conventionally
 set virtualedit=onemore
+
+set mouse=
 
 syntax enable
 set background=dark
@@ -20,33 +22,30 @@ set history=700
 let mapleader = ","
 let g:mapleader = ","
 
-" Ignore compiled files (assumes wildmenu is set)
+" ignore compiled files (assumes wildmenu is set)
 set wildignore=*.o,*~,*.pyc
 
-"Always show current position
+" show current position
 set ruler
 
-" Height of the command bar
+" command bar height
 set cmdheight=2
 
-" A buffer becomes hidden when it is abandoned
+" hide abandoned buffers instead
 set hid
 
 set whichwrap+=<,>,h,l
 
-" Ignore case when searching
 set ignorecase
-
-" When searching try to be smart about cases 
 set smartcase
 
-" Don't redraw while executing macros (good performance config)
+" don't redraw while executing macros (good performance config)
 set lazyredraw
 
 " regex
 set magic
 
-" Show matching brackets when text indicator is over them
+" show bracket match
 set showmatch
 
 " How many tenths of a second to blink when matching brackets
@@ -54,13 +53,16 @@ set mat=2
 
 " No annoying sound on errors
 set noerrorbells
-set novisualbell
+" 'vb' on and 't_vb=' disable bell sound
+set visualbell
 set t_vb=
+
+" timeout for map
 set tm=500
 
 set encoding=utf8
 
-" Use Unix as the standard file type
+" default type
 set ffs=unix,dos,mac
 
 " tabs
@@ -86,36 +88,14 @@ endtry
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Always show the status line
+" always show the status line
 set laststatus=2
 
-" Format the status line
+" format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-" Search down into subfolders
+" search down into subfolders
 set path+=**
-
-" Create the 'tags' file (may need to install ctags first)
-command! MakeTags !ctags -R .
-
-
-""""""""""""""
-" => AUTO <= "
-""""""""""""""
-" Line wrap on txt files
-augroup WrapLineInTXTFile
-    autocmd!
-    autocmd FileType txt setlocal wrap
-augroup END
-
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
-
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """"""""""""""""""
@@ -123,33 +103,30 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 """"""""""""""""""
 
 " imap jj <ESC>
+
 nmap <leader>w :w!<cr>
 
-" Treat long lines as break lines (useful when moving around in them)
+" traverse line-breaks normally
 map j gj
 map k gk
 
-" Disable highlight when <leader><cr> is pressed
+" disable highlighting
 map <silent> <leader><cr> :noh<cr>
 
-" Smart way to move between windows
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-" map <C-h> <C-W>h
-" map <C-l> <C-W>l
-
-" Close the current buffer
+" TODO: update according to buffer plugin (if installed)
+" close the current buffer
 map <leader>bd :Bclose<cr>
 
-" Close all the buffers
+" close all the buffers
 map <leader>ba :1,1000 bd!<cr>
 
+" TODO: update according to denite (if installed)
 nnoremap gp :bp<cr>
 nnoremap gn :bn<cr>
 nnoremap gl :ls<cr>
-nnoremap gb :ls<cr>:b
+nnoremap gb :ls<cr>:b<space>
 
-" Useful mappings for managing tabs
+" manage tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
@@ -178,9 +155,31 @@ map <silent> <leader>l :call WinMove('l')<cr>
 nmap <silent> <leader>vr :e $MYVIMRC<cr>
 
 
-"""""""""""""""""""
-" => Functions <= "
-"""""""""""""""""""
+""""""""""""""
+" => AUTO <= "
+""""""""""""""
+
+augroup WrapLineInTXTFile
+    autocmd!
+    autocmd FileType txt setlocal wrap
+augroup END
+
+" return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+
+""""""""""""""""""""""""""""
+" => Functions/Commands <= "
+""""""""""""""""""""""""""""
+
+" create the 'tags' file (may need to install ctags first)
+command! MakeTags !ctags -R .
 
 " move to the window in the direction shown, or create a new window
 function! WinMove(key)
