@@ -1,41 +1,10 @@
 #! /bin/bash
 
-#yanked from https://raw.githubusercontent.com/Parth/dotfiles/master/deploy
+#in process of creating; not working yet
+exit 1
 
-prompt_install() {
-	echo -n "$1 is not installed. Would you like to install it? (y/n) " >&2
-	old_stty_cfg=$(stty -g)
-	stty raw -echo
-	answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
-	stty $old_stty_cfg && echo
-	if echo "$answer" | grep -iq "^y" ;then
-		# This could def use community support
-		if [ -x "$(command -v apt)" ]; then
-			sudo apt install $1 -y
+#yanked and modified from https://raw.githubusercontent.com/Parth/dotfiles/master/deploy
 
-		elif [ -x "$(command -v brew)" ]; then
-			brew install $1
-
-		elif [ -x "$(command -v pkg)" ]; then
-			sudo pkg install $1
-
-		elif [ -x "$(command -v pacman)" ]; then
-			sudo pacman -S $1
-
-		else
-			echo "I'm not sure what your package manager is! Please install $1 on your own and run this deploy script again. Tests for package managers are in the deploy script you just ran starting at line 13. Feel free to make a pull request at https://github.com/parth/dotfiles :)" 
-		fi 
-	fi
-}
-
-check_for_software() {
-	echo "Checking to see if $1 is installed"
-	if ! [ -x "$(command -v $1)" ]; then
-		prompt_install $1
-	else
-		echo "$1 is installed."
-	fi
-}
 
 check_default_shell() {
 	if [ -z "${SHELL##*zsh*}" ] ;then
@@ -73,12 +42,6 @@ else
 fi
 
 
-check_for_software zsh
-echo 
-check_for_software vim
-echo
-check_for_software tmux
-echo
 
 check_default_shell
 
@@ -102,3 +65,24 @@ printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
 
 echo
 echo "Please log out and log back in for default shell to be initialized."
+
+
+
+# install dotfiles only + install vim/nvim plugins
+
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Are you using vim or neovim? (v/n)
+
+
+#install vim-plug
+
+#for neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+#for vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+#install plugins
+nvim +PlugInstall +UpdateRemotePlugins +qall
