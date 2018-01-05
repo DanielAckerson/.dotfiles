@@ -1,5 +1,11 @@
 "all old stuff/things i looked at in past
 
+" Smart way to move between windows
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
+
 " Set extra options when running in GUI mode
 " if has("gui_running")
 "     set guioptions-=T
