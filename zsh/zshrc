@@ -53,6 +53,9 @@ else
     export EDITOR='vim'
 fi
 
+# User scripts
+export PATH=$HOME/.dotfiles/bin:$PATH
+
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 

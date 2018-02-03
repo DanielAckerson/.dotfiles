@@ -1,0 +1,17 @@
+#! /bin/bash
+
+_date=$(date +"%F.md")
+if [ ! -a "$_date" ]
+then
+    echo > "$_date"
+fi
+
+if [ -z $1 ]
+then
+    vim $_date
+elif [ $1 == "-b" ]
+then
+    echo $_date
+else
+    return -1
+fi
