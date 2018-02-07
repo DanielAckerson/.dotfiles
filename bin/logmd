@@ -1,7 +1,7 @@
 #! /bin/bash
 
 _date=$(date +"%F.md")
-if [ ! -a "$_date" ]
+if [ ! -f "$_date" ]
 then
     echo > "$_date"
 fi
