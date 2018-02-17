@@ -1,38 +1,38 @@
 #! /bin/bash --norc
 
+#assume everything that is necessary to run script is installed
+
 if [ -x $(command -v nvim) ] ; then
-    #do neovim setup
+    #config for neovim
     echo "setting up neovim"
     VIM="nvim"
-    #where to install vim-plug
-    PLUGDIR="~/.local/share/nvim/site/autoload/plug.vim"
+    PLUGDIR="$HOME/.local/share/nvim/site/autoload/plug.vim"
+    VIMRC_STD="$HOME/.config/nvim/init.vim"
+    VIMRC_SRC="$HOME/.dotfiles/vim/neo.vim"
     pip3 install neovim
-    VIMRC="~/.config/nvim/init.vim"
-    backuprc "$VIMRC"
-
-
-
-
 elif [ -x $(command -v vim) ] ; then
-    #do vim setup
+    #config for vim 8
     echo "setting up vim"
     VIM=vim
-    #where to install vim-plug
-    PLUGDIR="~/.vim/autoload/plug.vim"
-    VIMRC="~/.vimrc"
-    if [ -f "$VIMRC" ] ; then
-        mv "$VIMRC" "$VIMRC.bk"
-    fi
+    PLUGDIR="$HOME/.vim/autoload/plug.vim"
+    VIMRC_STD="$HOME/.vim/vimrc"
+    VIMRC_SRC="$HOME/.dotfiles/vim/vim8.vim"
 else
     >&2 echo "vim not found"
     exit 1
 fi
 
-#install vim-plug
-curl -fLo $PLUGDIR --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#backup rc file and make new one that sources from $HOME/.dotfiles/vim/
+backuprc "$VIMRC_STD"
+printf "so $VIMRC_SRC" > "$VIMRC_STD"
 
-#install vim plugins
+#install vim-plug
+curl -fLo "$PLUGDIR" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+#install vim plugins (don't know if vim 8 has the command 'UpdateRemotePlugins')
 eval $VIM +PlugInstall +UpdateRemotePlugins
+
+############
 
 function backuprc() {
     if [ -f "$1" ] ; then
