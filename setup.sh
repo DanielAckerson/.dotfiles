@@ -4,40 +4,48 @@
 
 #assumed that git is available
 
+DOT="$HOME/.dotfiles"
 PKGS="zsh tmux neovim python3 python3-pip lua5.3 curl"
+PKGMGS=(apt apt-get pacman pkg)
 
-if [ -x $(command -v pacman) ] ; then
-    #install using pacman
-    sudo pacman -S "$PKGS"
-elif [ -x $(command -v apt) ] ; then
-    #install using apt (preferred)
-    sudo apt install "$PKGS"
-elif [ -x $(command -v apt-get) ] ; then
-    #install using apt-get
-    sudo apt-get install "$PKGS"
-else
-    >&2 printf "error: cannot find way to install packages. manual install necessary"
-    exit 1
-fi
+for MG in ${PKGMGS[@]}
+do
+    command -v "$MG" &> /dev/null
+    if [ $? == 0 ] ; then
+        break
+    fi
+done
+
+echo "Using $MG to install packages"
+
+case $MG in
+    apt|apt-get|pkg)
+        sudo $MG install $PKGS
+        ;;
+    pacman)
+        sudo pacman -S $PKGS
+        ;;
+esac
 
 chsh -s $(which zsh)
 
+STAMP=$(date +"%y%m%d%H%M%S")
 #zsh setup
 #
-#install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#download oh-my-zsh
+git clone git://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh" 2>/dev/null
 #backup zshrc and create new one that sources from .dotfiles
-mv "$HOME/.zshrc" "$HOME/.zshrc.autobk"
-printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" > "$HOME/.zshrc"
+mv "$HOME/.zshrc" "$HOME/.zshrc-$STAMP.bk"
+echo "source \"$DOT/zsh/zshrc\"" > "$HOME/.zshrc"
 
 
 #tmux setup
 #
 #backup tmux conf and source from .dotfiles
-mv "$HOME/.tmux.conf" "$HOME/.tmux.conf.autobk"
-printf "source-file $HOME/dotfiles/tmux/tmux.conf" > "$HOME/.tmux.conf"
+mv "$HOME/.tmux.conf" "$HOME/.tmux.conf-$STAMP.bk"
+echo "source-file $DOT/tmux/tmux.conf" > "$HOME/.tmux.conf"
 
 #vim setup
 #
 #run vim setup script
-bash setup-vim-env.sh
+bash --norc "$DOT/setup-vim-env.sh"
