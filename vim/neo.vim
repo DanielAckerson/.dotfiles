@@ -1,38 +1,29 @@
-so ~/.dotfiles/vim/common.vim
+so $HOME/.dotfiles/vim/common.vim
 
 " Config for neovim setups
 
-"TEMP
-"
-if has('nvim')
-    call plug#begin('~/.local/share/nvim/plugged')
-    
+call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
+    " Plug 'KeyboardFire/vim-minisnip'
+    " Plug 'fszymanski/deoplete-emoji'
+    " Plug 'joereynolds/deoplete-minisnip'
+    " Plug 'zchee/deoplete-zsh' zsh requires other things
     Plug 'Shougo/denite.nvim'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neco-vim'
-    Plug 'zchee/deoplete-clang'
-    " Plug 'zchee/deoplete-zsh' zsh requires other things
-    Plug 'fszymanski/deoplete-emoji'
-    " Plug 'KeyboardFire/vim-minisnip'
-    " Plug 'joereynolds/deoplete-minisnip'
-else
-    call plug#begin('~/.vim/plugged')
-endif
-
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-commentary'
-    Plug 'kien/ctrlp.vim'
-    Plug 'scrooloose/syntastic'
-    Plug 'scrooloose/nerdtree'
     Plug 'christoomey/vim-tmux-navigator'
-    Plug 'tommcdo/vim-exchange'
+    Plug 'kien/ctrlp.vim'
     Plug 'majutsushi/tagbar'
-    Plug 'scrooloose/nerdcommenter'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'qpkorr/vim-bufkill'
-    "Plug 'SirVer/ultisnips'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/syntastic'
+    Plug 'tommcdo/vim-exchange'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
+    Plug 'zchee/deoplete-clang'
 call plug#end()
 
 

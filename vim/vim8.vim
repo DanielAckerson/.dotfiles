@@ -1,4 +1,4 @@
-so ~/.dotfiles/vim/common.vim
+so $HOME/.dotfiles/vim/common.vim
 
 " Config for vim8 setups
 
@@ -9,35 +9,20 @@ so ~/.dotfiles/vim/common.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 
-if has('nvim')
-    call plug#begin('~/.local/share/nvim/plugged')
-    
-    Plug 'Shougo/denite.nvim'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neco-vim'
-    Plug 'zchee/deoplete-clang'
-    " Plug 'zchee/deoplete-zsh' zsh requires other things
-    Plug 'fszymanski/deoplete-emoji'
-    Plug 'KeyboardFire/vim-minisnip'
-    Plug 'joereynolds/deoplete-minisnip'
-else
-    call plug#begin('~/.vim/plugged')
-endif
-
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-commentary'
-    Plug 'kien/ctrlp.vim'
-    Plug 'scrooloose/syntastic'
-    Plug 'scrooloose/nerdtree'
+call plug#begin(join([$HOME, '/.vim/plugged'], ''))
     Plug 'christoomey/vim-tmux-navigator'
-    Plug 'tommcdo/vim-exchange'
+    Plug 'kien/ctrlp.vim'
     Plug 'majutsushi/tagbar'
-    Plug 'scrooloose/nerdcommenter'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'qpkorr/vim-bufkill'
-    "Plug 'SirVer/ultisnips'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/syntastic'
+    Plug 'tommcdo/vim-exchange'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
 call plug#end()
 
 filetype plugin indent on
@@ -56,7 +41,6 @@ set ttyfast
 
 " Set to auto read when a file is changed from the outside
 set autoread 
-
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 " set so=7
@@ -77,3 +61,20 @@ set incsearch
 set smarttab
 
 set autoindent "Auto indent 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:NERDTreeQuitOnOpen=1
+nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+let NERDTreeMapActivateNode='<SPACE>'
+
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+
+let g:syntastic_asm_compiler = 'nasm'
+let g:syntastic_asm_compiler_options = '-f elf'
+
+let g:deoplete#enable_at_startup = 1
