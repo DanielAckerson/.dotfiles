@@ -6,15 +6,12 @@
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias   l.='ls -d .*'
-alias   ll.='ls -lhd .*'
+alias l.='ls -d .*'
+alias ll.='ls -lhd .*'
 
 # get public IP using dig from dnsutils package; gets IP from DNS server because fast
-alias   wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 if [ -x "$(command -v nvim)" ]; then
-    alias   vim='nvim'
+    alias vim='nvim'
 fi
-
-# open dotfiles directory for editing 
-alias dot='vim +"cd ~/.dotfiles" +NERDTreeFocus'
