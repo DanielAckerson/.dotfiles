@@ -8,7 +8,7 @@ call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
     " Plug 'joereynolds/deoplete-minisnip'
     " Plug 'zchee/deoplete-zsh' zsh requires other things
     Plug 'Shougo/denite.nvim'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/deoplete.nvim', { 'tag': '4.0-serial', 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neco-vim'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'kien/ctrlp.vim'
