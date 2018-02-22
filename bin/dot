@@ -1,0 +1,26 @@
+#! /bin/bash
+
+cd $DOTFILES
+case $1 in
+    'edit')
+        shift 1
+        eval $EDITOR $@
+    ;;
+    'git')
+        shift 1
+        git $@
+    ;;
+    'ls')
+        ls --color=tty
+    ;;
+    'tree')
+        tree
+    ;;
+    '')
+        echo $DOTFILES
+    ;;
+    *)
+        echo 'Internal error!' >&2
+        exit 1
+    ;;
+esac
