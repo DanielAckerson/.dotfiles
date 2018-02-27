@@ -11,16 +11,16 @@ PKGMGS=(apt apt-get pacman pkg)
 
 #check if running as root
 if [[ $EUID -ne 0 ]] ; then
-    read -p "Running setup as root won't work as expected. Continue anyway? [y/n]:" -n 1 -r
+    read -p "Running setup as root won't work as expected. Continue anyway? [y/n] " -n 1 -r
     echo
-    if [[ ! $REPLY =~ ^[^Yy]$ ]] ; then
+    if [[ $REPLY =~ ^[^Yy]$ ]] ; then
         echo "Setup stopped by user." >&2
         exit 1
     fi 
 fi
 
 #check if packages should be installed with sudo
-read -p "Install with sudo? [y/n]:" -n 1 -r
+read -p "Install with sudo? [y/n] " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]] ; then
     unset DO
