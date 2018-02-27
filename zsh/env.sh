@@ -4,12 +4,12 @@ export LANG=en_US.UTF-8
 
 export MANPAGER='less'
 
-if [ -x "$(command -v nvim)" ] ; then
+if command -v nvim &>/dev/null ; then
     export EDITOR='nvim'
-elif [ -x "$(command -v vim)" ] ; then
+elif command -v vim &>/dev/null ; then
     export EDITOR='vim'
 else
-    export EDITOR='nano'
+    export EDITOR='vi'
 fi
 
 # User scripts
