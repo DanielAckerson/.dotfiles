@@ -37,3 +37,6 @@ source $DOTFILES/zsh/env.sh
 
 # Aliases
 source $DOTFILES/zsh/alia.sh
+
+# Functions
+source $DOTFILES/zsh/func.sh
