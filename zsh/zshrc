@@ -19,8 +19,6 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(tmux python git)
 
 # Load oh-my-zsh
@@ -33,10 +31,10 @@ source $ZSH/oh-my-zsh.sh
 export DOTFILES=$HOME/.dotfiles
 
 # Environment Variables
-source $DOTFILES/zsh/env.sh
+source $DOTFILES/zsh/env.zsh
 
 # Aliases
-source $DOTFILES/zsh/alia.sh
+source $DOTFILES/zsh/alias.zsh
 
 # Functions
-source $DOTFILES/zsh/func.sh
+source $DOTFILES/zsh/func.zsh
