@@ -4,13 +4,18 @@
 
 #assumed that git is available
 
+cmdexists() {
+    command -v "$1" &>/dev/null
+    return $?
+}
+
 DO=sudo
 DOT="$HOME/.dotfiles"
 PKGS="zsh tmux neovim python3 python3-pip lua5.3 curl"
 PKGMGS=(apt apt-get pacman pkg)
 
 #check if running as root
-if [[ $EUID -ne 0 ]] ; then
+if [[ $EUID -eq 0 ]] ; then
     read -p "Running setup as root won't work as expected. Continue anyway? [y/n] " -n 1 -r
     echo
     if [[ $REPLY =~ ^[^Yy]$ ]] ; then
@@ -22,13 +27,13 @@ fi
 #check if packages should be installed with sudo
 read -p "Install with sudo? [y/n] " -n 1 -r
 echo
-if [[ ! $REPLY =~ ^[Yy]$ ]] ; then
+if [[ $REPLY =~ ^[^Yy]$ ]] ; then
     unset DO
 fi 
 
 #find package manager
 for MG in ${PKGMGS[@]} ; do
-    if command -v "$MG" &>/dev/null ; then
+    if cmdexists "$MG" ; then
         break
     fi
 done
@@ -57,8 +62,7 @@ fi
 
 #TODO find alternative to 'which'. look into command or type, etc.
 echo "Setting default shell to zsh"
-chsh -s $(which zsh)
-if [[ $? -ne 0 ]] ; then
+if ! chsh -s $(which zsh); then
     echo "Couldn't set default shell" >&2
 fi
 
@@ -86,23 +90,23 @@ echo "source-file $DOT/tmux/tmux.conf" > "$HOME/.tmux.conf"
 
 #vim setup
 #
-if command -v nvim &>/dev/null; then
+if cmdexists nvim ; then
     #config for neovim
     echo "setting up neovim"
     VIM="nvim"
     PLUG="$HOME/.local/share/nvim/site/autoload/plug.vim"
     CFGDIR="$HOME/.config/nvim"
     VIMRC_STD="$CFGDIR/init.vim"
-    VIMRC_SRC="$HOME/.dotfiles/vim/neo.vim"
+    VIMRC_SRC="$DOT/vim/neo.vim"
     eval $DO pip install neovim
-elif command -v vim &>/dev/null; then
+elif cmdexists vim ; then
     #config for vim 8
     echo "setting up vim"
     VIM=vim
     PLUG="$HOME/.vim/autoload/plug.vim"
     CFGDIR="$HOME/.vim/"
     VIMRC_STD="$CFGDIR/vimrc"
-    VIMRC_SRC="$HOME/.dotfiles/vim/vim8.vim"
+    VIMRC_SRC="$DOT/vim/vim8.vim"
 else
     echo "vim not found" >&2
     exit 1
