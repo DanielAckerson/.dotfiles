@@ -11,6 +11,3 @@ elif command -v vim &>/dev/null ; then
 else
     export EDITOR='vi'
 fi
-
-# User scripts
-export PATH=$DOTFILES/bin:$PATH

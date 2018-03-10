@@ -3,6 +3,9 @@
 # function for managing dotfiles
 dot() {
 case $1 in
+    ''|'cd')
+        cd $DOTFILES
+    ;;
     'edit')
         pushd -q $DOTFILES
         shift 1
@@ -13,6 +16,12 @@ case $1 in
         shift 1
         git --git-dir=$DOTFILES/.git --work-tree=$DOTFILES $@
     ;;
+    'source'|'src'|'.')
+        if [[ -z $2 || $2 == 'zsh' ]] ; then
+            echo "Sourcing zshrc in $DOTFILES/zsh/."
+            source $DOTFILES/zsh/zshrc
+        fi
+    ;;
     'ls')
         ls $DOTFILES
     ;;
@@ -21,9 +30,6 @@ case $1 in
     ;;
     'dir')
         echo $DOTFILES
-    ;;
-    ''|'cd')
-        cd $DOTFILES
     ;;
     *)
         echo "error: $1 is not a recognized command" >&2
