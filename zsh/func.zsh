@@ -18,8 +18,8 @@ case $1 in
     ;;
     'source'|'src'|'.')
         if [[ -z $2 || $2 == 'zsh' ]] ; then
-            echo "Sourcing zshrc in $DOTFILES/zsh/."
-            source $DOTFILES/zsh/zshrc
+            echo "Sourcing $HOME/.zshrc"
+            source $HOME/.zshrc
         fi
     ;;
     'ls')
@@ -36,6 +36,11 @@ case $1 in
         return 1
     ;;
 esac
+}
+
+
+tmuxcd() {
+    (cd $@; tmux new-session -s${PWD##*/})
 }
 
 

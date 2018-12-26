@@ -23,7 +23,7 @@ call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
-    Plug 'zchee/deoplete-clang'
+    " Plug 'zchee/deoplete-clang'
 call plug#end()
 
 
