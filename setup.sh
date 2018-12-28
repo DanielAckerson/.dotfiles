@@ -1,8 +1,8 @@
 #! /bin/bash
 
-#script to setup my preferred environment
+# script to setup my preferred environment
 
-#assumed that git is available
+# assumed that git is available
 
 cmdexists() {
     command -v "$1" &>/dev/null
@@ -14,7 +14,7 @@ DOT="$HOME/.dotfiles"
 PKGS="zsh tmux neovim python3 python3-pip lua5.3 curl"
 PKGMGS=(apt apt-get pacman pkg)
 
-#check if running as root
+# check if running as root
 if [[ $EUID -eq 0 ]] ; then
     read -p "Running setup as root won't work as expected. Continue anyway? [y/n] " -n 1 -r
     echo
@@ -24,14 +24,14 @@ if [[ $EUID -eq 0 ]] ; then
     fi 
 fi
 
-#check if packages should be installed with sudo
+# check if packages should be installed with sudo
 read -p "Install with sudo? [y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[^Yy]$ ]] ; then
     unset DO
 fi 
 
-#find package manager
+# find package manager
 for MG in ${PKGMGS[@]} ; do
     if cmdexists "$MG" ; then
         break
@@ -39,7 +39,7 @@ for MG in ${PKGMGS[@]} ; do
 done
 echo "Using $MG to install packages"
 
-#try installing packages
+# try installing packages
 case $MG in
     apt|apt-get|pkg)
         eval $DO $MG install $PKGS
@@ -50,49 +50,46 @@ case $MG in
 esac
 
 if [[ $? -ne 0 ]] ; then
-    echo "error: Failed to install packages" >&2
-    echo "errot: Need manual setup" >&2
+    echo "Error: Failed to install packages" >&2
+    echo "Error: Need manual setup" >&2
     exit 1
 fi
 
 if ! eval $DO pip3 install --upgrade --force-reinstall pip ; then
-    echo "error: Failed to get newest version of pip."
+    echo "Error: Failed to get newest version of pip."
     exit 1
 fi
 
-#TODO find alternative to 'which'. look into command or type, etc.
+# TODO find alternative to 'which'. look into command or type, etc.
 echo "Setting default shell to zsh"
 if ! chsh -s $(which zsh); then
     echo "Couldn't set default shell" >&2
 fi
 
 STAMP=$(date +"%y%m%d%H%M%S")
-#zsh setup
-#
-#download oh-my-zsh
+# zsh setup
+# download oh-my-zsh
 echo "Downloading Oh My ZSH!"
-#TODO find better way to do this rather than brute force
+# TODO find better way to do this rather than brute force
 git clone git://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh" 2>/dev/null
 
-#TODO make backing up optional
-#backup zshrc and create new one that sources from .dotfiles
+# TODO make backing up optional
+# backup zshrc and create new one that sources from .dotfiles
 echo "Backing up old zshrc"
 mv "$HOME/.zshrc" "$HOME/.zshrc-$STAMP.bk" &> /dev/null
 echo "source \"$DOT/zsh/zshrc\"" > "$HOME/.zshrc"
 
-#tmux setup
-#
-#TODO make backing up optional
-#backup tmux conf and source from .dotfiles
+# tmux setup
+# TODO make backing up optional
+# backup tmux conf and source from .dotfiles
 echo "Backing up old tmux.conf"
 mv "$HOME/.tmux.conf" "$HOME/.tmux.conf-$STAMP.bk" &> /dev/null
 echo "source-file $DOT/tmux/tmux.conf" > "$HOME/.tmux.conf"
 
-#vim setup
-#
+# vim setup
 if cmdexists nvim ; then
-    #config for neovim
-    echo "setting up neovim"
+    # config for neovim
+    echo "Setting up neovim"
     VIM="nvim"
     PLUG="$HOME/.local/share/nvim/site/autoload/plug.vim"
     CFGDIR="$HOME/.config/nvim"
@@ -100,8 +97,8 @@ if cmdexists nvim ; then
     VIMRC_SRC="$DOT/vim/neo.vim"
     eval $DO pip install neovim
 elif cmdexists vim ; then
-    #config for vim 8
-    echo "setting up vim"
+    # config for vim 8
+    echo "Setting up vim"
     VIM=vim
     PLUG="$HOME/.vim/autoload/plug.vim"
     CFGDIR="$HOME/.vim/"
@@ -112,16 +109,16 @@ else
     exit 1
 fi
 
-#TODO make backing up optional
-#backup rc file and make new one that sources from $HOME/.dotfiles/vim/
+# TODO make backing up optional
+# backup rc file and make new one that sources from $HOME/.dotfiles/vim/
 echo "Backing up old vimrc"
 mkdir -p "$CFGDIR" && mv "$VIMRC_STD" "$VIMRC_STD\-$STAMP.bk" &> /dev/null
 echo "so $VIMRC_SRC" > "$VIMRC_STD"
 
-#install vim-plug
+# install vim-plug
 echo "Installing vim-plug"
 curl -fLo "$PLUG" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-#install vim plugins (don't know if vim 8 has the command 'UpdateRemotePlugins')
+# install vim plugins (don't know if vim 8 has the command 'UpdateRemotePlugins')
 echo "Installing vim plugins"
 eval $VIM +PlugInstall +qall
