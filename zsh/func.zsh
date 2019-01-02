@@ -7,6 +7,7 @@ case $1 in
         cd $DOTFILES
     ;;
     'edit')
+        # TODO: store previous dir in var instead of using pushd/popd. pushd doesn't store duplicates, so doesn't work if already in target dir
         pushd -q $DOTFILES
         shift 1
         eval $EDITOR $@
@@ -39,8 +40,8 @@ esac
 }
 
 
-tmuxcd() {
-    (cd $@; tmux new-session -s${PWD##*/})
+dmux() {
+    (cd $@ && tmux new-session -s$(echo ${PWD##*/} | sed 's/[ -.]/_/g'))
 }
 
 

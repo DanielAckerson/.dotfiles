@@ -10,4 +10,4 @@ echo "Backing up old .gitconfig"
 mv "$HOME/.gitconfig" "$HOME/.gitconfig-$STAMP.bk" &> /dev/null
 
 echo "[include]\n\
-    path = $DOTFILES/git/gitconf" > "$HOME/.gitconfig"
+    path = $DOTFILES/git/gitconfig" > "$HOME/.gitconfig"

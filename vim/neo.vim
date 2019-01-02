@@ -36,7 +36,9 @@ nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode='<SPACE>'
 
 let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall'
+let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
+let g:syntastic_cpp_include_dirs = ['../deps', 'deps']
+let g:syntastic_c_include_dirs = ['../deps', 'deps']
 
 let g:syntastic_asm_compiler = 'nasm'
 let g:syntastic_asm_compiler_options = '-f elf'
