@@ -22,6 +22,7 @@
     st = status
     ss = status -s
     sb = status -sb
+    sign-out = credential-cache exit
 [core]
 	# Don't paginate output by default
 	#pager = cat
