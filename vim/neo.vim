@@ -44,3 +44,7 @@ let g:syntastic_asm_compiler = 'nasm'
 let g:syntastic_asm_compiler_options = '-f elf'
 
 let g:deoplete#enable_at_startup = 1
+
+" let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = []
+" let g:syntastic_pylint_args = '--error-only'
