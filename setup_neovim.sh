@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # neovim setup
 
 echo "Setting up neovim"
@@ -15,15 +17,15 @@ mkdir -p "$CFGDIR"
 # TODO make backing up optional
 # backup rc file and make new one that sources from $HOME/.dotfiles/vim/
 echo "Backing up old vimrc"
-mv "$VIMRC_STD" "$VIMRC_STD\-$STAMP.bk" &> /dev/null
+mv "$VIMRC_STD" "$VIMRC_STD-$STAMP.bk" &> /dev/null
 
 echo "so $VIMRC_SRC" > "$VIMRC_STD"
 
 # install vim-plug
 echo "Installing vim-plug"
-curl -fLo "$PLUG" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo "$PLUG" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
 # install vim plugins (don't know if vim 8 has the command 'UpdateRemotePlugins')
 echo "Installing vim plugins"
-pip install --user neovim
+python3 -m pip install --user neovim
 eval $VIM +PlugInstall +qall

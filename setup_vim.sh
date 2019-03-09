@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # vim setup
 
 echo "Setting up vim"
@@ -15,7 +17,7 @@ mkdir -p "$CFGDIR"
 # TODO make backing up optional
 # backup rc file and make new one that sources from $HOME/.dotfiles/vim/
 echo "Backing up old vimrc"
-mv "$VIMRC_STD" "$VIMRC_STD\-$STAMP.bk" &> /dev/null
+mv "$VIMRC_STD" "$VIMRC_STD-$STAMP.bk" &> /dev/null
 
 echo "so $VIMRC_SRC" > "$VIMRC_STD"
 

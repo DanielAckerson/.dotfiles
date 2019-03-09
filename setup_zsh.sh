@@ -1,4 +1,8 @@
+#! /bin/bash
+
 # zsh setup
+
+DOT="$HOME/.dotfiles"
 
 echo "Setting up zsh"
 

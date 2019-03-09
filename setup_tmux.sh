@@ -1,4 +1,8 @@
+#! /bin/bash
+
 # tmux setup
+
+DOT="$HOME/.dotfiles"
 
 echo "Setting up tmux"
 

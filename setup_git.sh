@@ -1,4 +1,8 @@
+#! /bin/bash
+
 # git setup
+
+DOT="$HOME/.dotfiles"
 
 echo "Setting up git"
 
@@ -9,5 +13,5 @@ STAMP=$(date +"%y%m%d%H%M%S")
 echo "Backing up old .gitconfig"
 mv "$HOME/.gitconfig" "$HOME/.gitconfig-$STAMP.bk" &> /dev/null
 
-echo "[include]\n\
+printf "[include]\n\
     path = $DOTFILES/git/gitconfig" > "$HOME/.gitconfig"

@@ -7,3 +7,6 @@ python3-pip
 lua5.3
 curl
 wget
+pass
+dnsutils
+mosh
