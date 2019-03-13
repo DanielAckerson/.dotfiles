@@ -41,7 +41,7 @@ esac
 
 
 dmux() {
-    (cd $@ && tmux new-session -s$(echo ${PWD##*/} | sed 's/[ -.]/_/g'))
+    (cd $@ && tmux new-session -s$(pwd | sed -r 's|.*/()|\1|;s|[ -.]|_|g'))
 }
 
 
