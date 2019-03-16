@@ -10,7 +10,7 @@ VIM="nvim"
 PLUG="$HOME/.local/share/nvim/site/autoload/plug.vim"
 CFGDIR="$HOME/.config/nvim"
 VIMRC_STD="$CFGDIR/init.vim"
-VIMRC_SRC="$DOT/vim/neo.vim"
+VIMRC_SRC="$DOT/vim/nvim.vim"
 
 mkdir -p "$CFGDIR"
 
