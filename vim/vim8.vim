@@ -10,19 +10,7 @@ so $HOME/.dotfiles/vim/common.vim
 set nocompatible              " be iMproved, required
 
 call plug#begin(join([$HOME, '/.vim/plugged'], ''))
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'kien/ctrlp.vim'
-    Plug 'majutsushi/tagbar'
-    Plug 'nathanaelkane/vim-indent-guides'
-    Plug 'qpkorr/vim-bufkill'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'scrooloose/nerdtree'
-    Plug 'scrooloose/syntastic'
-    Plug 'tommcdo/vim-exchange'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-surround'
+    so $HOME/.dotfiles/vim/common_plugins.vim
 call plug#end()
 
 filetype plugin indent on
@@ -30,20 +18,11 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GENERAL
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Update vim whenever vimrc is edited and saved
-" augroup myvimrc
-" 	au!
-" 	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-" augroup END
-
 
 set ttyfast
 
 " Set to auto read when a file is changed from the outside
 set autoread 
-
-" Set 7 lines to the cursor - when moving vertically using j/k
-" set so=7
 
 " Turn on the WiLd menu
 set wildmenu 

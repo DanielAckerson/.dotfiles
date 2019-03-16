@@ -102,8 +102,6 @@ set path+=**
 " => Mappings <= "
 """"""""""""""""""
 
-" imap jj <ESC>
-
 nmap <leader>w :w!<cr>
 
 " traverse line-breaks normally
@@ -112,13 +110,6 @@ map k gk
 
 " disable highlighting
 map <silent> <leader><cr> :noh<cr>
-
-" TODO: update according to buffer plugin (if installed)
-" close the current buffer
-map <leader>bd :Bclose<cr>
-
-" close all the buffers
-map <leader>ba :1,1000 bd!<cr>
 
 " TODO: update according to denite (if installed)
 nnoremap gp :bp<cr>
@@ -138,9 +129,6 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>

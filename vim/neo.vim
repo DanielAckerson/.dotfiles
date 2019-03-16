@@ -3,27 +3,9 @@ so $HOME/.dotfiles/vim/common.vim
 " Config for neovim setups
 
 call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
-    " Plug 'KeyboardFire/vim-minisnip'
-    " Plug 'fszymanski/deoplete-emoji'
-    " Plug 'joereynolds/deoplete-minisnip'
-    " Plug 'zchee/deoplete-zsh' zsh requires other things
+    so $HOME/.dotfiles/vim/common_plugins.vim
     Plug 'Shougo/denite.nvim'
-    Plug 'Shougo/deoplete.nvim', { 'tag': '4.0-serial', 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neco-vim'
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'kien/ctrlp.vim'
-    Plug 'majutsushi/tagbar'
-    Plug 'nathanaelkane/vim-indent-guides'
-    Plug 'qpkorr/vim-bufkill'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'scrooloose/nerdtree'
-    Plug 'scrooloose/syntastic'
-    Plug 'tommcdo/vim-exchange'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-surround'
-    " Plug 'zchee/deoplete-clang'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 
