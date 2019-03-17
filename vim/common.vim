@@ -1,102 +1,43 @@
-" settings for my usual vim experience, common between neovim and vim 8
-
+" Common config for vim/neovim
 
 """"""""""""""""""
 " => Settings <= "
 """"""""""""""""""
 
-set number
-set relativenumber
-
-" makes cursor work conventionally
-set virtualedit=onemore
-
-set mouse=
-
 syntax enable
 set background=dark
 colorscheme ron
 
-set history=700
-
 let mapleader = ","
 let g:mapleader = ","
 
-" ignore compiled files (assumes wildmenu is set)
-set wildignore=*.o,*~,*.pyc
-
-" show current position
-set ruler
-
-" command bar height
 set cmdheight=2
+set number relativenumber
+set showmatch matchtime=2
+set showtabline=2
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%{HasPaste()}\ %-14.(%l,%c%V%)\ %P:%L
 
-" hide abandoned buffers instead
-set hid
-
+set hidden
+set history=700
+set mouse=nv
+set switchbuf=useopen,usetab,newtab
+set virtualedit=onemore
 set whichwrap+=<,>,h,l
 
-set ignorecase
-set smartcase
+set encoding=utf8
+set fileformats=unix,dos,mac
 
-" don't redraw while executing macros (good performance config)
+set magic
+set path+=**
+set wildignore=*.o,*~,*.pyc
+
+set timeoutlen=500
+set updatetime=1000
 set lazyredraw
 
-" regex
-set magic
-
-" show bracket match
-set showmatch
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
-set noerrorbells
-" 'vb' on and 't_vb=' disable bell sound
-set visualbell
-set t_vb=
-
-" timeout for map
-set tm=500
-
-set encoding=utf8
-
-" default type
-set ffs=unix,dos,mac
-
-" tabs
-set expandtab
-set shiftwidth=4
-set tabstop=4
-
-" Line break
-set lbr
-" set tw=5000
-
-set smartindent
-set wrap
-
-" Specify the behavior when switching between buffers 
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
-
-" TODO: check if deprecated
-" Remember info about open buffers on close
-set viminfo^=%
-
-" always show the status line
-set laststatus=2
-
-" format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
-" search down into subfolders
-set path+=**
-
+set expandtab shiftwidth=4 tabstop=4
+set smartindent linebreak
+set ignorecase smartcase
 
 """"""""""""""""""
 " => Mappings <= "
@@ -104,14 +45,15 @@ set path+=**
 
 nmap <leader>w :w!<cr>
 
-" traverse line-breaks normally
-map j gj
-map k gk
+noremap j gj
+noremap k gk
+nnoremap <c-e> <c-e>gj
+nnoremap <c-y> <c-y>gk
 
 " disable highlighting
 map <silent> <leader><cr> :noh<cr>
 
-" TODO: update according to denite (if installed)
+" manage buffers
 nnoremap gp :bp<cr>
 nnoremap gn :bn<cr>
 nnoremap gl :ls<cr>
@@ -122,16 +64,13 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+map <silent> <leader>pp :setlocal paste!<cr>
 
 " Window movement shortcuts
 map <silent> <leader>h :call WinMove('h')<cr>
@@ -142,14 +81,19 @@ map <silent> <leader>l :call WinMove('l')<cr>
 " Open vimrc
 nmap <silent> <leader>vr :e $MYVIMRC<cr>
 
+" Source current file
+nmap <leader>vs :so %<cr>
+
+" Source visual selection
+vmap <leader>vs y:@"<cr>
 
 """"""""""""""
 " => AUTO <= "
 """"""""""""""
 
-augroup WrapLineInTXTFile
+augroup WrapLine
     autocmd!
-    autocmd FileType txt setlocal wrap
+    autocmd FileType txt,markdown setlocal wrap
 augroup END
 
 " return to last edit position when opening files (You want this!)
@@ -159,13 +103,12 @@ autocmd BufReadPost *
      \ endif
 
 autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
 
 """"""""""""""""""""""""""""
 " => Functions/Commands <= "
 """"""""""""""""""""""""""""
 
+" TODO check out modern ctag implementations
 " create the 'tags' file (may need to install ctags first)
 command! MakeTags !ctags -R .
 
@@ -183,66 +126,47 @@ function! WinMove(key)
 	endif
 endfunction
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+
 function! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
 endfunction
 
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
 
-function! VisualSelection(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-" Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
-        return 'PASTE MODE  '
+        return '[PASTE]'
     en
     return ''
 endfunction
 
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+"""""""""""""""""""""""""
+" => Plugin Settings <= "
+"""""""""""""""""""""""""
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+nmap <silent> <leader>gs :Gstatus<cr>
+nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+let g:NERDTreeQuitOnOpen=1
+let NERDTreeMapActivateNode='<SPACE>'
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
-endfunction
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
 
+let g:syntastic_asm_compiler = 'nasm'
+let g:syntastic_asm_compiler_options = '-f elf'
+
+" let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = []
+" let g:syntastic_pylint_args = '--error-only'
+
+"""""""""""""""""""""
+" => Source Temp <= "
+"""""""""""""""""""""
+
+try
+    so $HOME/.dotfiles/vim/local.vim
+catch
+    :silent! !echo > $HOME/.dotfiles/vim/local.vim
+endtry
