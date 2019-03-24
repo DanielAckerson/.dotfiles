@@ -1,0 +1,6 @@
+*
+!.gitignore
+!alias.zsh
+!env.zsh
+!func.zsh
+!zshrc

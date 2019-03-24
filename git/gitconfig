@@ -2,7 +2,7 @@
 	name = Daniel Ackerson
 	useConfigOnly = true
 [credential]
-	helper = 'cache'
+	helper = "cache"
 [rebase]
 	autosquash = true
 [color]
@@ -13,9 +13,9 @@
 	oops = commit --amend --no-edit
 	review-local = "!git lg @{push}.."
     lo = log --oneline --decorate
-    lg = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    lga = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
-    lgs = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+    lg = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"
+    lga = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --all
+    lgs = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --stat
     cb = checkout -b
     cm = checkout master
     co = checkout

@@ -3,14 +3,14 @@
 # tmux setup
 
 DOT="$HOME/.dotfiles"
+DOTTMUX="$DOT/tmux/tmux.conf"
+TMUX="$HOME/.tmux.conf"
+STAMP=$(date +"%y%m%d%H%M%S")
 
 echo "Setting up tmux"
 
-STAMP=$(date +"%y%m%d%H%M%S")
-
-# TODO make backing up optional
-# backup tmux conf and source from .dotfiles
 echo "Backing up old tmux.conf"
-mv "$HOME/.tmux.conf" "$HOME/.tmux.conf-$STAMP.bk" &> /dev/null
-
-echo "source-file $DOT/tmux/tmux.conf" > "$HOME/.tmux.conf"
+if [[ -f $TMUX && ! -L $TMUX ]]; then
+    mv "$TMUX" "$TMUX-$STAMP.bk" >/dev/null 2>&1
+fi
+ln -s -T "$DOTTMUX" "$TMUX"

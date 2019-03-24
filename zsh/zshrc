@@ -4,37 +4,28 @@
 # Oh My ZSH Config #
 ####################
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
-
-# Set Theme
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+export DOT="$HOME/.dotfiles"
+export ZSH="$DOT/zsh/oh-my-zsh"
 ZSH_THEME="af-magic"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git)
-
-# Load oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+plugins=("git")
+source "$ZSH/oh-my-zsh.sh"
 
 ###############
 # User Config #
 ###############
 
-export DOTFILES=$HOME/.dotfiles
-
 # Environment Variables
-source $DOTFILES/zsh/env.zsh
-
-# Aliases
-source $DOTFILES/zsh/alias.zsh
+source "$DOT/zsh/env.zsh"
 
 # Functions
-source $DOTFILES/zsh/func.zsh
+source "$DOT/zsh/func.zsh"
+
+# Aliases
+source "$DOT/zsh/alias.zsh"
+
+# Local Config
+if [[ ! -f "$DOT/zsh/local.zsh" ]]; then
+    echo > "$DOT/zsh/local.zsh"
+fi
+source "$DOT/zsh/local.zsh" 2>/dev/null
