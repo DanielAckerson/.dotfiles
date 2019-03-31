@@ -5,10 +5,10 @@
 ####################
 
 export DOT="$HOME/.dotfiles"
-export ZSH="$DOT/zsh/oh-my-zsh"
+export DOTCONFIG="$HOME/.config/dotfiles"
+export ZSH="$DOTCONFIG/zsh/oh-my-zsh"
 ZSH_THEME="af-magic"
 COMPLETION_WAITING_DOTS="true"
-plugins=("git")
 source "$ZSH/oh-my-zsh.sh"
 
 ###############
@@ -25,7 +25,7 @@ source "$DOT/zsh/func.zsh"
 source "$DOT/zsh/alias.zsh"
 
 # Local Config
-if [[ ! -f "$DOT/zsh/local.zsh" ]]; then
-    echo > "$DOT/zsh/local.zsh"
+if ! source "$DOTCONFIG/zsh/zshrc" 2>/dev/null; then
+    mkdir -p "$DOTCONFIG/zsh" && \
+    echo > "$DOTCONFIG/zsh/zshrc"
 fi
-source "$DOT/zsh/local.zsh" 2>/dev/null

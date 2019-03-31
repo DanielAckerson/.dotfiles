@@ -166,7 +166,7 @@ let g:syntastic_python_checkers = []
 """""""""""""""""""""
 
 try
-    so $HOME/.dotfiles/vim/local.vim
+    so $HOME/.config/dotfiles/vim/vimrc
 catch
-    :silent! !echo > $HOME/.dotfiles/vim/local.vim
+    :silent! !echo > $HOME/.config/dotfiles/vim/vimrc
 endtry

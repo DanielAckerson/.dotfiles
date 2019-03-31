@@ -3,9 +3,10 @@
 # zsh setup
 
 DOT="$HOME/.dotfiles"
+DOTCONFIG="$HOME/.config/dotfiles"
 DOTZSH="$DOT/zsh/zshrc"
 ZSH="$HOME/.zshrc"
-OHMYZSH="$DOT/zsh/oh-my-zsh"
+OHMYZSH="$DOTCONFIG/zsh/oh-my-zsh"
 STAMP=$(date +"%y%m%d%H%M%S")
 
 echo "Setting up zsh"
@@ -15,6 +16,7 @@ chsh -s $(command -v zsh) || echo "Couldn't set default shell" >&2
 
 echo "Downloading Oh My ZSH!"
 if [[ ! -d $OHMYZSH ]]; then
+    mkdir -p "$DOTCONFIG/zsh" && \
     git clone https://github.com/robbyrussell/oh-my-zsh.git "$OHMYZSH"
 fi
 
