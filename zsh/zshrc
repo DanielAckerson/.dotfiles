@@ -4,9 +4,9 @@
 # Oh My ZSH Config #
 ####################
 
-export DOT="$HOME/.dotfiles"
-export DOTCONFIG="$HOME/.config/dotfiles"
-export ZSH="$DOTCONFIG/zsh/oh-my-zsh"
+export DOTF="$HOME/.dotfiles"
+export DOTFCONFIG="$HOME/.config/dotfiles"
+export ZSH="$DOTFCONFIG/zsh/oh-my-zsh"
 ZSH_THEME="af-magic"
 COMPLETION_WAITING_DOTS="true"
 source "$ZSH/oh-my-zsh.sh"
@@ -16,16 +16,17 @@ source "$ZSH/oh-my-zsh.sh"
 ###############
 
 # Environment Variables
-source "$DOT/zsh/env.zsh"
+source "$DOTF/zsh/env.zsh"
 
 # Functions
-source "$DOT/zsh/func.zsh"
+source "$DOTF/zsh/func.zsh"
 
 # Aliases
-source "$DOT/zsh/alias.zsh"
+source "$DOTF/zsh/alias.zsh"
 
 # Local Config
-if ! source "$DOTCONFIG/zsh/zshrc" 2>/dev/null; then
-    mkdir -p "$DOTCONFIG/zsh" && \
-    echo > "$DOTCONFIG/zsh/zshrc"
+if ! source "$DOTFCONFIG/zsh/zshrc" 2>/dev/null; then
+    mkdir -p "$DOTFCONFIG/zsh" && \
+    echo > "$DOTFCONFIG/zsh/zshrc"
 fi
+

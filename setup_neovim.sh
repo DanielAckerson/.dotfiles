@@ -4,8 +4,8 @@
 
 echo "Setting up neovim"
 
-DOT="$HOME/.dotfiles"
-DOTNVIM="$DOT/vim/nvim.vim"
+DOTF="$HOME/.dotfiles"
+DOTFNVIM="$DOTF/vim/nvim.vim"
 NVIMDIR="$HOME/.config/nvim"
 NVIM="$NVIMDIR/init.vim"
 PLUG="$HOME/.local/share/nvim/site/autoload/plug.vim"
@@ -17,7 +17,7 @@ echo "Backing up old vimrc"
 if [[ -f $NVIM && ! -L $NVIM ]]; then
     mv "$NVIM" "$NVIM-$STAMP.bk" >/dev/null 2>&1
 fi
-ln -s -T "$DOTNVIM" "$NVIM"
+ln -s -T "$DOTFNVIM" "$NVIM"
 
 echo "Installing vim-plug"
 curl -fLo "$PLUG" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"

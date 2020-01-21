@@ -2,8 +2,8 @@
 
 # tmux setup
 
-DOT="$HOME/.dotfiles"
-DOTTMUX="$DOT/tmux/tmux.conf"
+DOTF="$HOME/.dotfiles"
+DOTFTMUX="$DOTF/tmux/tmux.conf"
 TMUX="$HOME/.tmux.conf"
 STAMP=$(date +"%y%m%d%H%M%S")
 
@@ -13,4 +13,4 @@ echo "Backing up old tmux.conf"
 if [[ -f $TMUX && ! -L $TMUX ]]; then
     mv "$TMUX" "$TMUX-$STAMP.bk" >/dev/null 2>&1
 fi
-ln -s -T "$DOTTMUX" "$TMUX"
+ln -s -T "$DOTFTMUX" "$TMUX"

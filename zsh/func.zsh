@@ -1,22 +1,22 @@
 # file for defining functions for personal use
 
 # function for managing dotfiles
-dot()
+dotf()
 {
 case $1 in
     ""|"cd")
-        cd "$DOT"
+        cd "$DOTF"
     ;;
     "edit")
         # TODO: store previous dir in var instead of using pushd/popd. pushd doesn't store duplicates, so doesn't work if already in target dir
-        pushd -q "$DOT"
+        pushd -q "$DOTF"
         shift 1
         eval "$EDITOR" "$@"
         popd -q
     ;;
     "git")
         shift 1
-        git --git-dir="$DOT/.git" --work-tree="$DOT" "$@"
+        git --git-dir="$DOTF/.git" --work-tree="$DOTF" "$@"
     ;;
     "source"|"src"|".")
         if [[ -z $2 || $2 == "zsh" ]]; then
@@ -25,13 +25,13 @@ case $1 in
         fi
     ;;
     "ls")
-        ls "$DOT"
+        ls "$DOTF"
     ;;
     "tree")
-        tree "$DOT"
+        tree "$DOTF"
     ;;
     "dir")
-        echo "$DOT"
+        echo "$DOTF"
     ;;
     *)
         echo "error: $1 is not a recognized command" >&2

@@ -4,8 +4,8 @@
 
 echo "Setting up vim"
 
-DOT="$HOME/.dotfiles"
-DOTVIM="$DOT/vim/vim8.vim"
+DOTF="$HOME/.dotfiles"
+DOTFVIM="$DOTF/vim/vim8.vim"
 VIMDIR="$HOME/.vim"
 VIM="$VIMDIR/vimrc"
 PLUG="$VIMDIR/autoload/plug.vim"
@@ -17,7 +17,7 @@ echo "Backing up old vimrc"
 if [[ -f $VIM && ! -L $VIM ]]; then
     mv "$VIM" "$VIM-$STAMP.bk" >/dev/null 2>&1
 fi
-ln -s -T "$DOTVIM" "$VIM"
+ln -s -T "$DOTFVIM" "$VIM"
 
 echo "Installing vim-plug"
 curl -fLo "$PLUG" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

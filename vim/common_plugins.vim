@@ -2,16 +2,29 @@
 
 " Plugins I use in both vim and neovim.
 
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'kien/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-Plug 'qpkorr/vim-bufkill'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'tommcdo/vim-exchange'
+" motions and objects
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-" Plug 'valloric/youcompleteme'
+Plug 'tommcdo/vim-exchange'
+
+" UI
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'kien/ctrlp.vim'
+Plug 'qpkorr/vim-bufkill'
+Plug 'scrooloose/nerdtree'
+Plug 'mbbill/undotree'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" code
+Plug 'dense-analysis/ale'
+Plug 'vhdirk/vim-cmake'
+
+" fixes
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" unused
+" Plug 'majutsushi/tagbar'

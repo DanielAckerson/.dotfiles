@@ -5,11 +5,9 @@
 """"""""""""""""""
 
 syntax enable
-set background=dark
 colorscheme ron
-
-let mapleader = ","
-let g:mapleader = ","
+set background=dark
+set cursorline
 
 set cmdheight=2
 set number relativenumber
@@ -31,17 +29,29 @@ set magic
 set path+=**
 set wildignore=*.o,*~,*.pyc
 
-set timeoutlen=500
+set timeoutlen=300
 set updatetime=1000
 set lazyredraw
 
-set expandtab shiftwidth=4 tabstop=4
+set noexpandtab copyindent preserveindent
+set softtabstop=0 shiftwidth=4 tabstop=4
 set smartindent linebreak
 set ignorecase smartcase
+
+"""""""""""""""""""""""""
+" => Plugin Settings <= "
+"""""""""""""""""""""""""
+
+" NERDTree
+let g:NERDTreeQuitOnOpen=1
+let NERDTreeMapActivateNode='<space>'
 
 """"""""""""""""""
 " => Mappings <= "
 """"""""""""""""""
+
+let mapleader = ","
+let g:mapleader = ","
 
 nmap <leader>w :w!<cr>
 
@@ -69,9 +79,6 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Toggle paste mode on and off
-map <silent> <leader>pp :setlocal paste!<cr>
-
 " Window movement shortcuts
 map <silent> <leader>h :call WinMove('h')<cr>
 map <silent> <leader>j :call WinMove('j')<cr>
@@ -87,22 +94,53 @@ nmap <leader>vs :so %<cr>
 " Source visual selection
 vmap <leader>vs y:@"<cr>
 
+"""""""""""""""""""""""""
+" => Plugin Mappings <= "
+"""""""""""""""""""""""""
+
+" fugitive
+nmap <silent> <leader>gs :Gstatus<cr>
+
+" gitgutter
+nmap <silent> <leader>n :GitGutterNextHunk<cr>
+nmap <silent> <leader>p :GitGutterPrevHunk<cr>
+
+" git 
+
+" NERDTree
+nmap <silent> <leader><leader> :NERDTreeToggle<cr>
+
+" undotree
+nmap <silent> <leader>u :UndotreeToggle<cr>
+
 """"""""""""""
 " => AUTO <= "
 """"""""""""""
 
 augroup WrapLine
     autocmd!
-    autocmd FileType txt,markdown setlocal wrap
+    autocmd filetype txt,markdown setlocal wrap
+    autocmd filetype txt,markdown setlocal textwidth=80
+    autocmd filetype txt,markdown setlocal colorcolumn=80
 augroup END
 
 " return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
+autocmd bufreadpost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
 
-autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd bufwrite *.py :call DeleteTrailingWS()
+
+augroup RunPython
+    autocmd!
+    autocmd filetype python nnoremap <buffer> <F5> :exec '!python '.shellescape('%').' &'<cr>
+augroup END
+
+augroup PandocMarkdownHTML
+    autocmd!
+    autocmd filetype markdown nnoremap <buffer> <F5> :exec '!pandoc '.shellescape('%').' -o '.shellescape('%:r.html').' &'<cr>
+augroup END
 
 """"""""""""""""""""""""""""
 " => Functions/Commands <= "
@@ -137,29 +175,9 @@ endfunction
 function! HasPaste()
     if &paste
         return '[PASTE]'
-    en
+    endif
     return ''
 endfunction
-
-"""""""""""""""""""""""""
-" => Plugin Settings <= "
-"""""""""""""""""""""""""
-
-nmap <silent> <leader>gs :Gstatus<cr>
-nmap <silent> <leader><leader> :NERDTreeToggle<CR>
-
-let g:NERDTreeQuitOnOpen=1
-let NERDTreeMapActivateNode='<SPACE>'
-
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++17 -Wall'
-
-let g:syntastic_asm_compiler = 'nasm'
-let g:syntastic_asm_compiler_options = '-f elf'
-
-" let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_checkers = []
-" let g:syntastic_pylint_args = '--error-only'
 
 """""""""""""""""""""
 " => Source Temp <= "

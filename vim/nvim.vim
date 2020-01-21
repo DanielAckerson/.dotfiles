@@ -4,7 +4,15 @@ call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
     so $HOME/.dotfiles/vim/common_plugins.vim
     Plug 'Shougo/denite.nvim'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/neoinclude.vim', { 'for': 'cpp' }
+    Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
+    Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
+    Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+    Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+    Plug 'udalov/kotlin-vim', { 'for': 'kt' }
 call plug#end()
+
+so $HOME/.dotfiles/vim/common.vim
 
 """""""""""""""""
 " => GENERAL <= "
@@ -18,8 +26,7 @@ set shada=!,'100,<0,s10,h
 
 let g:deoplete#enable_at_startup = 1
 
-"""""""""""""""""""""""
-" => Source Common <= "
-"""""""""""""""""""""""
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-so $HOME/.dotfiles/vim/common.vim
+let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['pylint'] }
+let g:ale_linters_explicit = 1
