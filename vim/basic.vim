@@ -18,7 +18,7 @@ set statusline=%<%f%h%m%r%=%-14.(%l,%c%V%)\ %P:%L
 set hidden
 set history=300
 set mouse=
-set switchbuf=useopen,usetab,newtab
+set switchbuf=useopen
 set virtualedit=onemore
 set whichwrap+=<,>,h,l
 

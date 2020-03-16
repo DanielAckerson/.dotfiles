@@ -18,7 +18,7 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%{HasPaste()}\ %-14.(%l,%c%V
 set hidden
 set history=700
 set mouse=nv
-set switchbuf=useopen,usetab,newtab
+set switchbuf=useopen
 set virtualedit=onemore
 set whichwrap+=<,>,h,l
 
@@ -42,9 +42,11 @@ set ignorecase smartcase
 " => Plugin Settings <= "
 """""""""""""""""""""""""
 
-" NERDTree
 let g:NERDTreeQuitOnOpen=1
 let NERDTreeMapActivateNode='<space>'
+
+let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['flake8', 'pylint'] }
+let g:ale_linters_explicit = 1
 
 """"""""""""""""""
 " => Mappings <= "
@@ -63,12 +65,6 @@ nnoremap <c-y> <c-y>gk
 " disable highlighting
 map <silent> <leader><cr> :noh<cr>
 
-" manage buffers
-nnoremap gp :bp<cr>
-nnoremap gn :bn<cr>
-nnoremap gl :ls<cr>
-nnoremap gb :ls<cr>:b<space>
-
 " manage tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
@@ -77,7 +73,7 @@ map <leader>tm :tabmove
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Window movement shortcuts
 map <silent> <leader>h :call WinMove('h')<cr>

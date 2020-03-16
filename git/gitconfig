@@ -8,21 +8,38 @@
 [color]
 	ui = auto
 [alias]
-	st = status
 	ci = commit
 	oops = commit --amend --no-edit
-	review-local = "!git lg @{push}.."
-    lo = log --oneline --decorate
-    lg = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"
-    lga = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --all
-    lgs = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --stat
-    cb = checkout -b
-    cm = checkout master
-    co = checkout
-    st = status
-    ss = status -s
-    sb = status -sb
-    sign-out = credential-cache exit
+
+	lo = log --oneline --decorate
+	lg = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"
+	lga = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --all
+	lgs = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --stat
+	lon = !git --no-pager lo
+	lgn = !git --no-pager lg
+	lgan = !git --no-pager lga
+	lgsn = !git --no-pager lgs
+	review-local = !git lg @{push}..
+
+	cb = checkout -b
+	cm = checkout master
+	co = checkout
+
+	bd = branch -d
+	bD = branch -D
+
+	rp = remote prune
+
+	d = diff
+	ds = diff --stat
+	dc = diff --cached
+
+	st = status
+	ss = status -s
+	sb = status -sb
+
+	sign-out = credential-cache exit
+
 [core]
 	# Don't paginate output by default
 	#pager = cat

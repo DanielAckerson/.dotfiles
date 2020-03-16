@@ -8,7 +8,7 @@ export DOTF="$HOME/.dotfiles"
 export DOTFCONFIG="$HOME/.config/dotfiles"
 export ZSH="$DOTFCONFIG/zsh/oh-my-zsh"
 ZSH_THEME="af-magic"
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="false"
 source "$ZSH/oh-my-zsh.sh"
 
 ###############

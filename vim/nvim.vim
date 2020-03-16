@@ -27,6 +27,3 @@ set shada=!,'100,<0,s10,h
 let g:deoplete#enable_at_startup = 1
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['pylint'] }
-let g:ale_linters_explicit = 1
