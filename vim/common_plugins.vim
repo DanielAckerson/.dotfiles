@@ -21,6 +21,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " code
+Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
 Plug 'vhdirk/vim-cmake'
 
