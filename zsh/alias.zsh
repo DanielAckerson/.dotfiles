@@ -10,3 +10,5 @@ alias vim="echo 'did you mean nvim?'"
 alias open="xdg-open &> /dev/null"
 
 alias -g null="&> /dev/null" 
+
+alias pip-upgrade-all="pip list -o --format=freeze | sed '/^\\-e/d;s/==.*$//' | xargs -n1 pip install -U"
