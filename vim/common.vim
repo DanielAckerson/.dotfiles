@@ -29,7 +29,7 @@ set magic
 set path+=**
 set wildignore=*.o,*~,*.pyc
 
-set timeoutlen=300
+set timeoutlen=500
 set updatetime=1000
 set lazyredraw
 
@@ -59,8 +59,8 @@ nmap <leader>w :w!<cr>
 
 noremap j gj
 noremap k gk
-nnoremap <c-e> <c-e>gj
-nnoremap <c-y> <c-y>gk
+" nnoremap <c-e> <c-e>gj
+" nnoremap <c-y> <c-y>gk
 
 " disable highlighting
 map <silent> <leader><cr> :noh<cr>
@@ -71,9 +71,6 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Window movement shortcuts
 map <silent> <leader>h :call WinMove('h')<cr>

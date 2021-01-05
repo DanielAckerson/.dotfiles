@@ -26,13 +26,17 @@
 	co = checkout
 
 	bd = branch -d
-	bD = branch -D
+	bdd = branch -D
 
 	rp = remote prune
 
 	d = diff
 	ds = diff --stat
 	dc = diff --cached
+
+	ri = rebase -i
+	rc = rebase --continue
+	ra = rebase --abort
 
 	st = status
 	ss = status -s

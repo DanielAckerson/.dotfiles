@@ -21,9 +21,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " code
-Plug 'davidhalter/jedi-vim'
-Plug 'dense-analysis/ale'
-Plug 'vhdirk/vim-cmake'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'dense-analysis/ale', { 'for': 'python' }
+Plug 'vhdirk/vim-cmake', { 'for': 'cmake' }
+Plug 'vim-syntastic/syntastic', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " fixes
 Plug 'tmux-plugins/vim-tmux-focus-events'
