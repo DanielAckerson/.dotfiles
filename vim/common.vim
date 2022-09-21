@@ -9,6 +9,11 @@ colorscheme ron
 set background=dark
 set cursorline
 
+" maybe enable to make underscores standout in cursorline?
+" TODO: doesn't work in this file but does work when manually set
+"syn match DOTunderscore "_"
+"hi DOTunderscore cterm=bold
+
 set cmdheight=2
 set number relativenumber
 set showmatch matchtime=2
@@ -45,8 +50,11 @@ set ignorecase smartcase
 let g:NERDTreeQuitOnOpen=1
 let NERDTreeMapActivateNode='<space>'
 
-let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['flake8', 'pylint'] }
+let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['pylint'], 'rust': ['analyzer'] }
 let g:ale_linters_explicit = 1
+
+" avoiding unreadable blue highlight on Rust warning
+hi ALEWarning ctermbg=DarkYellow
 
 """"""""""""""""""
 " => Mappings <= "
@@ -92,7 +100,7 @@ vmap <leader>vs y:@"<cr>
 """""""""""""""""""""""""
 
 " fugitive
-nmap <silent> <leader>gs :Gstatus<cr>
+nmap <silent> <leader>gs :Git<cr>
 
 " gitgutter
 nmap <silent> <leader>n :GitGutterNextHunk<cr>
