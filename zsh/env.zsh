@@ -13,3 +13,5 @@ else
     export VISUAL="vi"
     export MANPAGER="less"
 fi
+
+export LESS="-RiF --mouse --wheel-lines=3"

@@ -30,3 +30,6 @@ if ! source "$DOTFCONFIG/zsh/zshrc" 2>/dev/null; then
     echo > "$DOTFCONFIG/zsh/zshrc"
 fi
 
+# put in /etc/profile.d/firefox-smoothscroll.sh
+# export MOZ_USE_XINPUT2=1
+# export MOZ_ENABLE_WAYLAND=1
