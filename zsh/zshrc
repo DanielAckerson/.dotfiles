@@ -33,3 +33,8 @@ fi
 # put in /etc/profile.d/firefox-smoothscroll.sh
 # export MOZ_USE_XINPUT2=1
 # export MOZ_ENABLE_WAYLAND=1
+
+# always launch in tmux
+if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+    tmux attach || tmux >/dev/null 2>&1
+fi
