@@ -42,6 +42,8 @@
 	ss = status -s
 	sb = status -sb
 
+	psu = push --set-upstream
+
 	sign-out = credential-cache exit
 
 [core]
