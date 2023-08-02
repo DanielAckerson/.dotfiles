@@ -10,6 +10,7 @@ call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'chrisbra/csv.vim', { 'for': 'csv' }
     Plug 'udalov/kotlin-vim', { 'for': 'kt' }
+    Plug 'stevearc/vim-arduino'
 call plug#end()
 
 so $HOME/.dotfiles/vim/common.vim

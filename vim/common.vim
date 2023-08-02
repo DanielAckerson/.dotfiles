@@ -5,14 +5,17 @@
 """"""""""""""""""
 
 syntax enable
-colorscheme ron
+"colorscheme ron
 set background=dark
 set cursorline
 
 " maybe enable to make underscores standout in cursorline?
 " TODO: doesn't work in this file but does work when manually set
-"syn match DOTunderscore "_"
-"hi DOTunderscore cterm=bold
+" syn match DOTunderscore "_"
+" hi DOTunderscore cterm=bold
+
+hi StatusLine ctermbg=magenta
+hi StatusLineNC ctermbg=magenta
 
 set cmdheight=2
 set number relativenumber
@@ -52,6 +55,7 @@ let NERDTreeMapActivateNode='<space>'
 
 let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['pylint'], 'rust': ['analyzer'] }
 let g:ale_linters_explicit = 1
+let g:ale_virtualtext_cursor = 0
 
 " avoiding unreadable blue highlight on Rust warning
 hi ALEWarning ctermbg=DarkYellow

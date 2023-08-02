@@ -60,6 +60,9 @@
 	wordRegex = .
 	# Display submodule-related information (commit listings)
 	submodule = log
+[checkout]
+	# Use as many parallel worksers as there are available logical cores.
+	workers = 0
 [fetch]
 	# Auto-fetch submodule changes (sadly, won't auto-update)
 	recurseSubmodules = on-demand
