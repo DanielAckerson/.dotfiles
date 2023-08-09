@@ -12,17 +12,26 @@
 	oops = commit --amend --no-edit
 
 	lo = log --oneline --decorate
-	lg = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"
-	lga = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --all
-	lgs = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --stat
+	loh = lo '--exclude=refs/heads/hidden/*'
 	lon = !git --no-pager lo
+
+	lg = log --graph --pretty=\"%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"
+	lga = lg --all
+	lgs = lg --stat
+
+	lgh = lg '--exclude=refs/heads/hidden/*' 
+	lgah = lgh --all
+	lgsh = lgh --stat
+
 	lgn = !git --no-pager lg
 	lgan = !git --no-pager lga
 	lgsn = !git --no-pager lgs
+
 	review-local = !git lg @{push}..
 
 	cb = checkout -b
 	cm = checkout master
+	cd = checkout develop
 	co = checkout
 
 	bd = branch -d
@@ -52,6 +61,8 @@
 	# Don't consider trailing space change as a cause for merge conflicts
 	whitespace = -trailing-space
 [diff]
+	# possibly breaks fugitive-vim?
+	#algorithm = histogram
 	# Use better, descriptive initials (c, i, w) instead of a/b.
 	mnemonicPrefix = true
 	# Show renames/moves as such
@@ -120,3 +131,8 @@
 	prereleaseSuffix = .beta
 	prereleaseSuffix = -rc
 	prereleaseSuffix = .rc
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
