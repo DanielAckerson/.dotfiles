@@ -30,3 +30,7 @@ if ! source "$DOTFCONFIG/zsh/zshrc" 2>/dev/null; then
     echo > "$DOTFCONFIG/zsh/zshrc"
 fi
 
+# always launch in tmux
+if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+	tmux attach || tmux >/dev/null 2>&1
+fi

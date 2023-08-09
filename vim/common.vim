@@ -5,7 +5,6 @@
 """"""""""""""""""
 
 syntax enable
-colorscheme ron
 set background=dark
 set cursorline
 
@@ -13,7 +12,7 @@ set cmdheight=2
 set number relativenumber
 set showmatch matchtime=2
 set showtabline=2
-set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%{HasPaste()}\ %-14.(%l,%c%V%)\ %P:%L
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%{HasPaste()}\ %-14.(%l,%c%V/%<%{strwidth(getline('.'))}%)\ %P:%L
 
 set hidden
 set history=700
@@ -38,6 +37,9 @@ set softtabstop=0 shiftwidth=4 tabstop=4
 set smartindent linebreak
 set ignorecase smartcase
 
+"might not work?
+"set diffopt=filler,internal,algorithm:histogram,indent-heuristic,vertical
+
 """""""""""""""""""""""""
 " => Plugin Settings <= "
 """""""""""""""""""""""""
@@ -45,8 +47,17 @@ set ignorecase smartcase
 let g:NERDTreeQuitOnOpen=1
 let NERDTreeMapActivateNode='<space>'
 
-let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['flake8', 'pylint'] }
+let g:ale_linters = { 'cpp': ['clangtidy'], 'python': ['pylint'] }
 let g:ale_linters_explicit = 1
+let g:ale_virtualtext_cursor = 0
+"let g:ale_python_pylint_options = '--generate-members'
+
+"let g:jedi#auto_initialization = 0
+"let g:jedi#popup_on_dot = 0
+" let g:jedi#completions_enabled = 0
+
+" disable docstring window popup
+autocmd FileType python setlocal completeopt-=preview
 
 """"""""""""""""""
 " => Mappings <= "
@@ -92,7 +103,7 @@ vmap <leader>vs y:@"<cr>
 """""""""""""""""""""""""
 
 " fugitive
-nmap <silent> <leader>gs :Gstatus<cr>
+" nmap <silent> <leader>gs :Git<cr>
 
 " gitgutter
 nmap <silent> <leader>n :GitGutterNextHunk<cr>

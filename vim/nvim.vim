@@ -8,11 +8,16 @@ call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
     Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
     Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-    Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-    Plug 'udalov/kotlin-vim', { 'for': 'kt' }
+    Plug 'shumphrey/fugitive-gitlab.vim', { 'for': 'python' }
+    " Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+    " Plug 'udalov/kotlin-vim', { 'for': 'kt' }
 call plug#end()
 
 so $HOME/.dotfiles/vim/common.vim
+
+" set diffopt=filler,internal,algorithm:histogram,indent-heuristic
+
+set inccommand=nosplit
 
 """""""""""""""""
 " => GENERAL <= "
@@ -27,3 +32,8 @@ set shada=!,'100,<0,s10,h
 let g:deoplete#enable_at_startup = 1
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+let g:fugitive_gitlab_domains = {'ssh://gitlab.optotraffic.local': 'http://gitlab.optotraffic.local/ai/'}
+
+" disable this when using deoplete-jedi
+let g:jedi#completions_enabled = 0
