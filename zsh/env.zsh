@@ -14,4 +14,5 @@ else
     export MANPAGER="less"
 fi
 
-export LESS="-RiF --mouse --wheel-lines=3"
+# export LESS="-RiF --mouse --wheel-lines=3"
+export LESS="-Ri --mouse --wheel-lines=3"
