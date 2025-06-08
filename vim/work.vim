@@ -4,7 +4,6 @@ call plug#begin(join([$HOME, '/.local/share/nvim/plugged'], ''))
     so $HOME/.dotfiles/vim/common_plugins.vim
     Plug 'Shougo/denite.nvim'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-clang', { 'for': 'cpp' }
     Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
     Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
     Plug 'chrisbra/csv.vim', { 'for': 'csv' }

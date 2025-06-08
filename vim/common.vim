@@ -5,7 +5,7 @@
 """"""""""""""""""
 
 syntax enable
-"colorscheme ron
+colorscheme vim
 set background=dark
 set cursorline
 
